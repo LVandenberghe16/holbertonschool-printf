@@ -9,8 +9,8 @@ int main(void)
 {
 	int size;
 
-	size = _printf("C'est %s la sauce\n", "oui");
-	_printf("Taille imprimée : %d\n", size);
+	size = _printf("C'est %z la sauce\n", "oui");
+	printf("Taille %z imprimée : %d\n", size);
 
 	return (0);
 }
