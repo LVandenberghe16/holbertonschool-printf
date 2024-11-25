@@ -1,4 +1,4 @@
-#include "printf.h"
+#include "main.h"
 
 /**
  * init_data - Initialise la structure print_t
@@ -16,6 +16,8 @@ print_t *init_data(print_t *data)
     /* Associez directement les gestionnaires */
     data->char_handler = print_character;
     data->string_handler = print_string;
+	data->double_handler = print_double;
+	data->integer_handler = print_integer;
 
     return (data);
 }
@@ -49,6 +51,10 @@ int _printf(const char *format, ...)
                 data->char_handler(va_arg(args, int), data);
             else if (format[i] == 's')
                 data->string_handler(va_arg(args, char *), data);
+			else if (format[i] == 'd')
+				data->double_handler(va_arg(args, double), data);
+			else if (format[i] == 'i')
+				data->integer_handler(va_arg(args, int), data);	
             else
             {
                 write(1, &format[i - 1], 1);
