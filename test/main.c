@@ -8,5 +8,6 @@
  */
 int main(void)
 {
-	_printf("c'est la sauce", "oui", "oui");
+	_printf("c'est %s la sauce", "oui", "oui");
+	return (0);
 }
