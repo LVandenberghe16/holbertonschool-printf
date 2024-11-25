@@ -17,5 +17,9 @@ typedef struct detect
 
 int _printf(const char *format, ...);
 void print_character(const char c);
+void _putstr(const char *str);
+int _strlen(const char *str);
+void _putchar(const char c);
+void print_string(const char *str);
 
 #endif /*PRINTF_H*/
