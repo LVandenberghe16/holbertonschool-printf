@@ -8,3 +8,8 @@ void print_character(const char c)
 {
 	write(1, &c, 1);
 }
+
+void print_string(const char *str)
+{
+	_putstr(str);
+}
