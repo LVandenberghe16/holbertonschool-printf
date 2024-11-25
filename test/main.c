@@ -1,4 +1,4 @@
-#include "../printf.h"
+#include "../main.h"
 
 /**
  * main - Point d'entrée du programme
@@ -9,8 +9,7 @@ int main(void)
 {
 	int size;
 
-	size = _printf("C'est %z la sauce\n", "oui");
-	printf("Taille %z imprimée : %d\n", size);
-
+	size = _printf("C'est %i %s %c la sauce\n", 12, 77777777, "poulet", 'o');
+	printf("Taille imprimée : %d\n", size);
 	return (0);
 }
