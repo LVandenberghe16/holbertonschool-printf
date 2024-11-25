@@ -14,16 +14,16 @@
  */
 typedef struct print
 {
-	int index;
-	int size;
-	void (*handlers[2])(const void *arg, struct print *data);
+    int size;
+    void (*char_handler)(int, struct print *);
+    void (*string_handler)(const char *, struct print *);
 } print_t;
 
 int _printf(const char *format, ...);
-void print_character(const void *c, print_t *print);
+void print_character(int c, print_t *print);
 void _putstr(const char *str);
 int _strlen(const char *str);
 void _putchar(const char c);
-void print_string(const void *str, print_t *print);
+void print_string(const char *str, print_t *print);
 
 #endif /* PRINTF_H */
