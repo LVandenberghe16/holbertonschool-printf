@@ -18,9 +18,9 @@ SRC	=	test/main.c
 
 OBJ	=	$(SRC:.c=.o)
 
-NAME	=	mysh
+NAME	=	printf
 
-CFLAGS	=	-Wall -Wextra  -I includes/
+CFLAGS	=	-Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
