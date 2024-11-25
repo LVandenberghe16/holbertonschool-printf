@@ -1,13 +1,16 @@
-#include "printf.h"
+#include "../printf.h"
 
 /**
- * main - prints anything based on a format string
- * list of types of arguments passed to the function
+ * main - Point d'entrée du programme
  *
- * Return: the size of the printed string
+ * Return: Toujours 0
  */
 int main(void)
 {
-	_printf("c'est %s la sauce", "oui", "oui");
+	int size;
+
+	size = _printf("C'est %s la sauce\n", "oui");
+	_printf("Taille imprimée : %d\n", size);
+
 	return (0);
 }

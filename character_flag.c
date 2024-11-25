@@ -1,15 +1,30 @@
 #include "printf.h"
 
 /**
- * print_character - prints a single character, used for the c format
- * @c: a simple character
+ * print_character - Imprime un seul caractère
+ * @c: caractère à imprimer
+ * @data: structure contenant la taille de la chaîne générée
  */
-void print_character(const char c)
+void print_character(const void *c, print_t *data)
 {
-	write(1, &c, 1);
+	if (c == NULL || data == NULL)
+		return;
+
+	data->size += 1;
+	write(1, (char *)c, 1);
 }
 
-void print_string(const char *str)
+/**
+ * print_string - Imprime une chaîne de caractères
+ * @str: chaîne à imprimer
+ * @data: structure contenant la taille de la chaîne générée
+ */
+void print_string(const void *str, print_t *data)
 {
-	_putstr(str);
+	const char *string = (const char *)str;
+
+	if (str == NULL || data == NULL)
+		return;
+	data->size += _strlen(string);
+	_putstr(string);
 }

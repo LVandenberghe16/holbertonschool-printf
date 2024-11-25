@@ -7,19 +7,23 @@
 #include <stdio.h>
 
 /**
- * struct detect - a structure representing a point in 2D space
- * @index: used to define where we are when we read a string
+ * struct print - structure utilisée pour suivre l'état du formatage
+ * @index: position actuelle lors de l'analyse du format
+ * @size: taille totale de la chaîne formatée
+ * @handlers: tableau de pointeurs sur fonctions de gestion de formats
  */
-typedef struct detect
+typedef struct print
 {
 	int index;
-} detect_t;
+	int size;
+	void (*handlers[2])(const void *arg, struct print *data);
+} print_t;
 
 int _printf(const char *format, ...);
-void print_character(const char c);
+void print_character(const void *c, print_t *print);
 void _putstr(const char *str);
 int _strlen(const char *str);
 void _putchar(const char c);
-void print_string(const char *str);
+void print_string(const void *str, print_t *print);
 
-#endif /*PRINTF_H*/
+#endif /* PRINTF_H */

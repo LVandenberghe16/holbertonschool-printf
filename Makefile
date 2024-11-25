@@ -13,37 +13,51 @@ GREEN = "\e[32m"
 LIGHT_BLUE = "\e[94m"
 WHITE = "\e[1;37m"
 
-SRC	=	test/main.c
-		printf.c
+SRC =	printf.c 			\
+		character_flag.c 	\
+		printing_functions.c 	\
+		test/main.c
 
-OBJ	=	$(SRC:.c=.o)
+TEST_SRC = test/main.c
 
-NAME	=	printf
+OBJ = $(SRC:.c=.o)
 
-CFLAGS	=	-Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format
-all:	$(NAME)
+TEST_OBJ = $(TEST_SRC:.c=.o)
 
-$(NAME):	$(OBJ)
-	gcc -o $(NAME) $(OBJ) $(CFLAGS)
+NAME = printf
 
-	rm -f $(OBJ)
+CFLAGS = -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format
+LDFLAGS = 
+
+CC = gcc
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LDFLAGS) \
+	&& $(ECHO) $(BOLD) $(GREEN)"Compilation réussie : "$(LIGHT_BLUE)"$(NAME)"$(DEFAULT) \
+	|| $(ECHO) $(BOLD) $(RED)"Erreur de compilation !"$(DEFAULT)
+
+debug: CFLAGS += -g
+debug: re
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ) $(TEST_OBJ) \
+	&& $(ECHO) $(BOLD) $(GREEN)"Nettoyage des fichiers objets."$(DEFAULT)
 
-fclean:	clean
-		rm -f $(NAME)
+fclean: clean
+	@rm -f $(NAME) unit_test \
+	&& $(ECHO) $(BOLD) $(GREEN)"Nettoyage complet."$(DEFAULT)
 
-debug:	CFLAGS += -g
-debug:	re
+re: fclean all
 
-re:	fclean all
+tests_run: clean
+	@$(CC) -o unit_test $(SRC) $(TEST_SRC) -lcriterion --coverage $(CFLAGS) \
+	&& $(ECHO) $(BOLD) $(GREEN)"Tests prêts à être exécutés."$(DEFAULT) \
+	|| $(ECHO) $(BOLD) $(RED)"Erreur lors de la préparation des tests."$(DEFAULT)
+	@./unit_test
 
-tests_run:
-		gcc -o unit_test $(SRC) -L . -lmy -lcriterion --coverage
-		./unit_test
-
-%.o:	%.c
-	@$(CC) -c -o $@ $^ $(CFLAGS) && $(ECHO) -n $(BOLD) $(GREEN)" [OK] " \
-	$(WHITE) || $(ECHO) -n $(BOLD) $(RED)" [KO] "$(WHITE) && $(ECHO) \
-	$(BOLD) $< | rev | cut -d/ -f 1 | rev && $(ECHO) -n $(DEFAULT)
+%.o: %.c
+	@$(CC) -c -o $@ $< $(CFLAGS) \
+	&& $(ECHO) -n $(BOLD) $(GREEN)" [OK] " $(WHITE) $< $(DEFAULT) \
+	|| $(ECHO) -n $(BOLD) $(RED)" [KO] "$(WHITE) $< $(DEFAULT)

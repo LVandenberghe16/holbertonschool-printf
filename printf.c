@@ -1,42 +1,89 @@
 #include "printf.h"
 
 /**
- * detect_format - function to detect the format after the %
- * @str: list of types of arguments passed to the function
- * @detect: structure used to set our index in the string
+ * detect_format - Détecte le format après un caractère %
+ * @str: chaîne formatée
+ * @data: structure utilisée pour suivre l'état de l'analyse
  *
- * Return: the character after the %
+ * Return: le caractère après %
  */
-char detect_format(const char *str, detect_t *detect)
+char detect_format(const char *str, print_t *data)
 {
-	for (; str[detect->index] != '%'; detect->index += 1)
+	if (str == NULL || data == NULL)
+		return ('\0');
+
+	for (; str[data->index] != '%' && str[data->index] != '\0'; data->index += 1)
 	{
+		data->size += 1;
 	}
-	printf("return = %c\n index at = %i", str[detect->index + 1],
-		detect->index);
-	return (str[detect->index + 1]);
+
+	if (str[data->index] == '\0')
+		return ('\0'); /* Retourne '\0' si le format est incomplet */
+
+	return (str[data->index + 1]);
 }
 
+/**
+ * init_data - Initialise la structure print_t
+ * @data: structure à initialiser
+ *
+ * Return: un pointeur vers la structure initialisée, ou NULL en cas d'erreur
+ */
+print_t *init_data(print_t *data)
+{
+	if (data == NULL)
+		return (NULL);
+
+	data->index = 0;
+	data->size = 0;
+
+	/* Initialise les handlers */
+	data->handlers[0] = print_character;
+	data->handlers[1] = print_string;
+
+	return (data);
+}
 
 /**
- * _printf - prints anything based on a format string
- * @format: list of types of arguments passed to the function
+ * _printf - Imprime un format basé sur une chaîne
+ * @format: chaîne contenant le format
  *
- * Return: the size of the printed string
+ * Return: la taille totale des caractères imprimés
  */
 int _printf(const char *format, ...)
 {
-	va_list arg;
-	detect_t *detect;
+	print_t *data;
+	va_list args;
+	int size;
+	int i;
 
-	int (*flag[2])(va_list, void*);
-	flag[0] = print_character;
-	detect = malloc(sizeof(detect_t));
-	detect->index = 0;
-	if (format == NULL)
-		return (0);
-	detect_format(format, detect);
-	printf("index value = %i", detect->index);
-	free(detect);
-	return (0);
+	if (!format)
+		return (-1);
+	data = malloc(sizeof(print_t));
+	if (!data)
+		return (-1);
+	data->size = 0;
+	va_start(args, format);
+	for (i = 0; format[i]; i++)
+	{
+		if (format[i] == '%' && format[i + 1])
+		{
+			i++;
+			if (format[i] == 'c')
+				print_character(va_arg(args, int), data);
+			else if (format[i] == 's')
+				print_string(va_arg(args, char *), data);
+			else
+				write(1, &format[i], 1), data->size++;
+		}
+		else
+		{
+			write(1, &format[i], 1);
+			data->size++;
+		}
+	}
+	va_end(args);
+	size = data->size;
+	free(data);
+	return (size);
 }
