@@ -17,6 +17,8 @@ typedef struct print
     int size;
     void (*char_handler)(int, struct print *);
     void (*string_handler)(const char *, struct print *);
+    void (*integer_handler)(int, struct print *);
+    void (*double_handler)(int, struct print *);
 } print_t;
 
 int _printf(const char *format, ...);
@@ -25,5 +27,9 @@ void _putstr(const char *str);
 int _strlen(const char *str);
 void _putchar(const char c);
 void print_string(const char *str, print_t *print);
+void print_integer(int i, print_t *print);
+void print_double(int d, print_t *print);
+int print_numbers(int nb);
+double print_big_numbers(int nb);
 
 #endif /* PRINTF_H */
