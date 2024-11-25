@@ -5,13 +5,13 @@
  * @c: caractère à imprimer
  * @data: structure contenant la taille de la chaîne générée
  */
-void print_character(const void *c, print_t *data)
+void print_character(int c, print_t *data)
 {
-	if (c == NULL || data == NULL)
-		return;
+    if (data == NULL)
+        return;
 
-	data->size += 1;
-	write(1, (char *)c, 1);
+    data->size += 1;
+    write(1, &c, 1);
 }
 
 /**
@@ -19,12 +19,11 @@ void print_character(const void *c, print_t *data)
  * @str: chaîne à imprimer
  * @data: structure contenant la taille de la chaîne générée
  */
-void print_string(const void *str, print_t *data)
+void print_string(const char *str, print_t *data)
 {
-	const char *string = (const char *)str;
+    if (str == NULL || data == NULL)
+        return;
 
-	if (str == NULL || data == NULL)
-		return;
-	data->size += _strlen(string);
-	_putstr(string);
+    data->size += _strlen(str);
+    _putstr(str);
 }
