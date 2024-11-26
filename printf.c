@@ -27,23 +27,49 @@ print_t *init_data(print_t *data)
  * @specifier: The format specifier character
  * @args: The variable argument list
  * @data: Pointer to the print_t structure
+ * @i: used to move in the string format
+ * Return: index
  */
-void handle_specifier(char specifier, va_list args, print_t *data)
+int handle_specifier(const char *specifier, va_list args, print_t *data, int i)
 {
-	if (specifier == 'c')
+	if (specifier[i + 1] == 'c')
+	{
 		data->char_handler(va_arg(args, int), data);
-	else if (specifier == 's')
+		i++;
+	}
+	else if (specifier[i + 1] == 's')
+	{
 		data->string_handler(va_arg(args, char *), data);
-	else if (specifier == 'd')
+		i++;
+	}
+	else if (specifier[i + 1] == 'd')
+	{
 		data->double_handler(va_arg(args, double), data);
-	else if (specifier == 'i')
+		i++;
+	}
+	else if (specifier[i + 1] == 'i')
+	{
 		data->integer_handler(va_arg(args, int), data);
+		i++;
+	}
+	else if (specifier[i + 1] == '%')
+	{
+		_putchar('%');
+		data->size++;
+		i++;
+	}
 	else
 	{
-		write(1, "%", 1);
-		write(1, &specifier, 1);
+		_putchar('%');
 		data->size++;
+		if (specifier[i + 1] != '\0')
+		{
+			_putchar(specifier[i + 1]);
+			data->size++;
+			i++;
+		}
 	}
+	return (i);
 }
 
 /**
@@ -60,8 +86,7 @@ void process_format(const char *format, va_list args, print_t *data)
 	{
 		if (format[i] == '%' && format[i + 1])
 		{
-			i++;
-			handle_specifier(format[i], args, data);
+			i = handle_specifier(format, args, data, i);
 		}
 		else
 		{
