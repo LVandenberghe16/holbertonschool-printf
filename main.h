@@ -9,7 +9,7 @@
 /**
  * struct print - structure utilisée pour suivre l'état du formatage
  * @size: taille totale de la chaîne formatée
- * @char_handler: oui
+ * @char_handler: oui   
  * @string_handler: oui
  * @integer_handler: oui
  * @double_handler: oui
@@ -32,6 +32,5 @@ void print_string(const char *str, print_t *print);
 void print_integer(int i, print_t *print);
 void print_double(int d, print_t *print);
 int print_numbers(int nb);
-double print_big_numbers(int nb);
 
 #endif /* PRINTF_H */
