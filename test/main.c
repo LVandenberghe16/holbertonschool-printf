@@ -28,5 +28,9 @@ int main(void)
 	printf("Len:[%d]\n", len2);
 	_printf("Unknown:[%r]\n");
 	printf("Unknown:[%r]\n");
+	len = _printf("float given to int:[%d]\n", 0.5);
+	len2 = printf("float given to int:[%d]\n", 0.5);
+	_printf("Len:[%d]\n", len);
+	printf("Len:[%d]\n", len2);
 	return (0);
 }

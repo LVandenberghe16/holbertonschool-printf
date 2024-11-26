@@ -9,7 +9,7 @@
 /**
  * struct print - structure utilisée pour suivre l'état du formatage
  * @size: taille totale de la chaîne formatée
- * @char_handler: oui   
+ * @char_handler: oui
  * @string_handler: oui
  * @integer_handler: oui
  * @double_handler: oui

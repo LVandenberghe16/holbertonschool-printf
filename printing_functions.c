@@ -42,6 +42,8 @@ void _putstr(const char *str)
 /**
  *print_numbers -take a number and print it
  *
+ * @nb: number given to the function to print as char*
+ * Return: return the size of the printed number
 */
 int print_numbers(int nb)
 {
@@ -56,10 +58,10 @@ int print_numbers(int nb)
 		nb = nb * -1;
 		nb2 = nb;
 	}
-	for (;nb2 != 0; size++)
+	for (; nb2 != 0; size++)
 		nb2 = nb2 / 10;
 	x = malloc(sizeof(char) * size + 1);
-	for(i = size ; i != 0; i--)
+	for (i = size; i != 0; i--)
 	{
 		x[i - 1] = (nb % 10) + '0';
 		nb = nb / 10;
