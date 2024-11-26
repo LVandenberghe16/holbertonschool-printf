@@ -40,6 +40,7 @@ void handle_specifier(char specifier, va_list args, print_t *data)
 		data->integer_handler(va_arg(args, int), data);
 	else
 	{
+		write(1, "%", 1);
 		write(1, &specifier, 1);
 		data->size++;
 	}
