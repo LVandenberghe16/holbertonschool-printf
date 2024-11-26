@@ -42,12 +42,7 @@ int handle_specifier(const char *specifier, va_list args, print_t *data, int i)
 		data->string_handler(va_arg(args, char *), data);
 		i++;
 	}
-	else if (specifier[i + 1] == 'd')
-	{
-		data->double_handler(va_arg(args, double), data);
-		i++;
-	}
-	else if (specifier[i + 1] == 'i')
+	else if (specifier[i + 1] == 'i' || specifier[i + 1] == 'd')
 	{
 		data->integer_handler(va_arg(args, int), data);
 		i++;
