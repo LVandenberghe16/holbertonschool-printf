@@ -57,17 +57,14 @@ int print_numbers(int nb)
 		nb = -nb;
 		size++;
 	}
-
 	do {
 		buffer[i++] = (nb % 10) + '0';
 		nb /= 10;
 	} while (nb > 0);
-
 	while (i > 0)
 	{
 		_putchar(buffer[--i]);
 		size++;
 	}
-
 	return (size);
 }
