@@ -47,27 +47,27 @@ void _putstr(const char *str)
 */
 int print_numbers(int nb)
 {
-	int i;
-	int nb2 = nb;
+	char buffer[12]; /* Supporte les entiers jusqu'à 32 bits */
 	int size = 0;
-	char *x;
+	int i = 0;
 
 	if (nb < 0)
 	{
 		_putchar('-');
-		nb = nb * -1;
-		nb2 = nb;
+		nb = -nb;
+		size++;
 	}
-	for (; nb2 != 0; size++)
-		nb2 = nb2 / 10;
-	x = malloc(sizeof(char) * size + 1);
-	for (i = size; i != 0; i--)
+
+	do {
+		buffer[i++] = (nb % 10) + '0';
+		nb /= 10;
+	} while (nb > 0);
+
+	while (i > 0)
 	{
-		x[i - 1] = (nb % 10) + '0';
-		nb = nb / 10;
+		_putchar(buffer[--i]);
+		size++;
 	}
-	x[size] = '\0';
-	_putstr(x);
-	free(x);
+
 	return (size);
 }
