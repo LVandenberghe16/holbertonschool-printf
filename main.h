@@ -8,17 +8,19 @@
 
 /**
  * struct print - structure utilisée pour suivre l'état du formatage
- * @index: position actuelle lors de l'analyse du format
  * @size: taille totale de la chaîne formatée
- * @handlers: tableau de pointeurs sur fonctions de gestion de formats
+ * @char_handler: oui
+ * @string_handler: oui
+ * @integer_handler: oui
+ * @double_handler: oui
  */
 typedef struct print
 {
-    int size;
-    void (*char_handler)(int, struct print *);
-    void (*string_handler)(const char *, struct print *);
-    void (*integer_handler)(int, struct print *);
-    void (*double_handler)(int, struct print *);
+	int size;
+	void (*char_handler)(int, struct print *);
+	void (*string_handler)(const char *, struct print *);
+	void (*integer_handler)(int, struct print *);
+	void (*double_handler)(int, struct print *);
 } print_t;
 
 int _printf(const char *format, ...);
