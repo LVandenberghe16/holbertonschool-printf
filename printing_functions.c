@@ -38,11 +38,10 @@ void _putstr(const char *str)
 	write(1, str, _strlen(str));
 }
 
+#include "main.h"
 /**
- * print_numbers - take a number and print it
+ *print_numbers -take a number and print it
  *
- * @nb: number pass to the function to be printed as char*
- * Return: the number of character printed
 */
 int print_numbers(int nb)
 {
@@ -51,10 +50,16 @@ int print_numbers(int nb)
 	int size = 0;
 	char *x;
 
-	for (; nb2 != 0; size++)
+	if (nb < 0)
+	{
+		_putchar('-');
+		nb = nb * -1;
+		nb2 = nb;
+	}
+	for (;nb2 != 0; size++)
 		nb2 = nb2 / 10;
 	x = malloc(sizeof(char) * size + 1);
-	for (i = size; i != 0; i--)
+	for(i = size ; i != 0; i--)
 	{
 		x[i - 1] = (nb % 10) + '0';
 		nb = nb / 10;
