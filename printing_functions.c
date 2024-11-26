@@ -51,20 +51,33 @@ int print_numbers(int nb)
 	int size = 0;
 	int i = 0;
 
-	if (nb < 0)
+	/* Cas spécial pour INT_MIN */
+	if (nb == INT_MIN)
+	{
+		_putchar('-');
+		_putchar('2');
+		nb = 147483648;
+		size += 2;
+	}
+	else if (nb < 0)
 	{
 		_putchar('-');
 		nb = -nb;
 		size++;
 	}
+
+	/* Conversion du nombre */
 	do {
 		buffer[i++] = (nb % 10) + '0';
 		nb /= 10;
 	} while (nb > 0);
+
+	/* Affichage du nombre en partant de la fin */
 	while (i > 0)
 	{
 		_putchar(buffer[--i]);
 		size++;
 	}
+
 	return (size);
 }

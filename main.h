@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <limits.h>
 
 /**
  * struct print - structure utilisée pour suivre l'état du formatage
