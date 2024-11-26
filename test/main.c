@@ -65,7 +65,7 @@ int main(void)
     printf("Length of _printf: [%d], Length of printf: [%d]\n", len, len2);
 
     /* Test 10: %s with NULL string */
-    printf("\nTest 10: %s with NULL string\n");
+    printf("\nTest 10: with NULL string\n");
     len = _printf("Null string: [%s]\n", NULL);
     len2 = printf("Null string: [%s]\n", NULL);
     printf("Length of _printf: [%d], Length of printf: [%d]\n", len, len2);
@@ -75,7 +75,5 @@ int main(void)
     len = _printf("Invalid char: [%c]\n", 300);  /* Outside valid char range */
     len2 = printf("Invalid char: [%c]\n", 300);  /* Outside valid char range */
     printf("Length of _printf: [%d], Length of printf: [%d]\n", len, len2);
-
-	_printf("\npoulet\n %d %i\n");
     return (0);
 }

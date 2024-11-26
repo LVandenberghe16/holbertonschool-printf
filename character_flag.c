@@ -22,8 +22,11 @@ void print_character(int c, print_t *data)
 void print_string(const char *str, print_t *data)
 {
 	if (str == NULL || data == NULL)
+	{
+		_putstr("(null)");
+		data->size += 6;
 		return;
-
+	}
 	data->size += _strlen(str);
 	_putstr(str);
 }

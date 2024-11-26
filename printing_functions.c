@@ -33,10 +33,7 @@ int _strlen(const char *str)
 void _putstr(const char *str)
 {
 	if (str == NULL)
-	{
-		_putstr("(null)");
 		return;
-	}
 
 	write(1, str, _strlen(str));
 }
