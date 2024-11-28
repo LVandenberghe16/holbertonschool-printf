@@ -1,0 +1,68 @@
+
+---
+
+### man_printf
+
+```plaintext
+PRINTF(1)                  Custom Manual                  PRINTF(1)
+
+NAME
+       _printf - Custom implementation of the standard printf function.
+
+SYNOPSIS
+       #include "main.h"
+
+       int _printf(const char *format, ...);
+
+DESCRIPTION
+       The _printf function produces output according to a specified
+       format. It supports a subset of format specifiers for  char‐
+       acters, strings, integers, and percent signs.
+
+       format
+              A  string  containing text and format specifiers. For‐
+              mat specifiers begin with '%' and are replaced by  the
+              respective argument.
+
+       Supported format specifiers:
+
+              %c   Prints a single character.
+
+              %s   Prints a string of characters.
+
+              %d, %i
+                   Prints a signed decimal integer.
+
+              %%   Prints a literal '%' character.
+
+RETURN VALUE
+       _printf returns the total number of characters printed (ex‐
+       cluding the null byte used to end strings). In case of error,
+       it returns -1.
+
+EXAMPLES
+       Example 1: Simple string
+              _printf("Hello, World!\n");
+              Output: Hello, World!
+
+       Example 2: Format specifiers
+              _printf("Char: %c, String: %s, Int: %d\n",
+                      'A', "Holberton", 42);
+              Output: Char: A, String: Holberton, Int: 42
+
+       Example 3: Literal percent
+              _printf("Use %% to print percent signs.\n");
+              Output: Use % to print percent signs.
+
+LIMITATIONS
+       - Does not support floating-point (%f) or hexadecimal (%x).
+       - No width or precision modifiers.
+       - Handles integers up to 32-bit only.
+
+AUTHOR
+       Ludwig Vandenberghe, Ibrahim Houmaidi
+
+COPYRIGHT
+       This manual page is part of a custom C project and is not af‐
+       filiated with the standard library printf implementation.
+
