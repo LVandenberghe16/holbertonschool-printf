@@ -19,6 +19,7 @@ A custom implementation of the `printf` function written in C, developed by Ludw
 ## Overview
 `_printf` is a re-implementation of the standard library `printf` function. It provides basic formatted output capabilities by supporting a subset of the standard format specifiers. This project focuses on understanding variadic functions, format string parsing, and output management in C.
 
+![_printf_flowchart](./diagram.png)
 ---
 
 ## Features
